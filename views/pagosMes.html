@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+      <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    <script src="https://kit.fontawesome.com/4cd99373c2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Goldman:wght@400;700&family=Inconsolata:wght@300&family=Montserrat:ital,wght@1,300&family=Orbitron:wght@500&family=Rubik:ital,wght@1,300&family=Space+Mono:ital@1&family=Teko:wght@500&family=Turret+Road:wght@500&display=swap" rel="stylesheet">
+
+  </head>
+  
+  <style>
+  
+  .designer{
+  font-size:15px;
+  font-family: 'Orbitron', sans-serif;
+  color:#808000;
+  }
+
+   select{
+    width:80%;
+    margin-bottom:20px;
+  }
+
+  #importe,#nota,#nombre{
+    width:80%;
+    margin-bottom:20px;
+  }
+
+
+  </style>
+  
+  
+  <body>
+    <h2 class="titulo"> <?= mesActual?></h2>
+
+  <form class="col-md-10">
+ 
+    <select class="selector" id="selector" required>
+  <option value="SELECCIONA" disabled selected >Seleccionar Cliente</option> 
+    <? for(i=0; i <listado.length;i++){
+        ?>
+        <option value="<?= listado[i][0] ?>"><?= listado[i][0] ?></option>    
+                
+        
+        <?} ?>   
+   
+  </select>
+
+ 
+   <input type="number" aria-label="Importe" class="form-control" placeholder="$" id="importe">
+ <input type="text" aria-label="Importe" class="form-control" placeholder="Nota" id="nota" >
+  <input type="text" aria-label="cliente" class="form-control" placeholder="Cliente" id="nombre" value="Roberto">
+  
+
+   <button type="button" class="btn btn-success" id="buscar" onclick="enviarPago()">Enviar Pago</button>
+   <button type="button" class="btn btn-warning" id="cancel" onclick="cancelar()">Cancelar Pago</button>
+ 
+   <button  class="btn btn-danger" id="btn_close" onclick="cerrar()">Cerrar</button>
+</form>
+    <br>
+    <!--<h5 class="designer">Diseño de paginas by Roberto Ceratti</h5>-->
+    <h5 class="designer">System by Roberto Ceratti</h5>
+    
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+//FUNCION PARA APLICAR PAGOS E CONTROL DE PAGOS
+function enviarPago(){
+    var nombre = document.getElementById('selector').value;
+    var importe = document.getElementById('importe').value;
+    var anotacion = document.getElementById('nota').value;
+
+
+    if(nombre != "" && importe!= "" ){
+      google.script.run.withSuccessHandler(clear).pagos(nombre,importe,anotacion);
+
+      alertify.success('El Pago esta en proceso espera por favor!');
+      retardo();
+      retardoPregunta();
+      
+      }else{
+      alertify.error('Completa los campos!');
+      
+      }
+
+
+};
+
+
+//limpiar formulario
+function clear(){
+    var nombre = document.getElementById('selector');
+    var importe = document.getElementById('importe');
+    var anotacion = document.getElementById('nota');
+
+    nombre.value = ""
+    importe.value = ""
+    anotacion.value = ""
+
+};
+
+
+
+//funcion para cancelar pago realizado
+function cancelar(){
+  var nombre = document.getElementById('selector').value;
+  var importe = document.getElementById('importe').value;
+  var anotacion = document.getElementById('nota').value;
+
+  if(nombre != ""  ){
+    google.script.run.withSuccessHandler(cerrar).reversoPago(nombre,anotacion);
+
+    alertify.success('La cancelacion esta en proceso espera por favor!');
+    retardoCancelacion();
+    
+    }else{
+    alertify.error('Completa los campos!');
+    
+  }
+
+};
+
+
+
+function retardo(){
+      setTimeout(() => {
+        toast();
+        },2000);
+
+  };
+
+  function retardoPregunta(){
+
+    setTimeout(()=>{
+      pregunta()
+    },4000)
+
+
+  };
+
+
+
+  function retardoCancelacion(){
+      setTimeout(() => {
+        toastCancelado();
+        },3000);
+
+  };
+
+
+
+
+
+function controlPagos(){
+  google.script.run.withSuccessHandler(cerrar).pagosModal();
+};
+
+
+function cerrar(e){
+//google.script.host.close();
+google.script.host.close();
+
+};
+
+
+function pregunta(){
+ 
+  Swal.fire({
+  title: 'Proceso exitoso, Deseas realizar otro pago?',
+  text: "A T T I SYSTEM",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, claro!'
+}).then((result) => {
+  if (result.isConfirmed) {
+   controlPagos();
+  }else{
+    cerrar();
+  }
+})
+};
+
+
+function toast(){
+  const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Pago aplicado exitosamente!'
+})
+
+};
+
+function toastCancelado(){
+  const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Pago eliminado exitosamente!'
+})
+
+};
+
+
+
+</script>
+
+</html>
+
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+  </head>
+  <style>
+  
+  
+   
+  .saldo{
+    color:blue;
+    font-weigth:600;
+    font-size:20px;
+  }
+ 
+ .indicadores{
+   display: grid;
+   grid-template-columns: repeat(5,1fr);
+   /*grid-auto-rows: minmax(100px, auto);*/
+    width: 100%;
+
+ }
+  
+ .red{
+   color:red;
+ }
+
+.blue{
+  color:blue;
+}
+
+.green{
+  color: green;
+}
+
+input{
+  display: none;
+}
+
+
+  </style>
+
+
+  <body>
+
+
+  <div class="container">   
+
+
+<!--Comienza la tabla interactiva con buscador y paginacion-->
+<table class="table" >
+    <thead><!--CABEZERAS-->
+    <tr><!--FILAS-->
+        
+        <th data-cls-column="bg-white fg-black text-left" >Entradas</th>
+       
+        <th data-cls-column="bg-white fg-black text-center">Monto</th>
+        <th data-cls-column="bg-white fg-black text-left" >Salidas</th>
+       
+        <th data-cls-column="bg-white fg-black text-center">Monto</th>
+        
+    </tr>
+    </thead>
+    <tbody><!--CUERPO DE LA TABLA-->
+     <? for(i=0; i <rangoData.length;i++){
+        ?>
+         <tr><!--FILAS-->
+        <td><?= rangoData[i][0] ?></td>
+        <td class="blue"><?= rangoData[i][1] ?></td>
+         <td><?= rangoData[i][2] ?></td>
+        <td class="red"><?= rangoData[i][3] ?></td>
+               
+        
+        </tr>
+        <?} ?>  
+   
+       
+   
+    
+    </tbody>
+</table>
+<a href="#" id="botonn">Detalle Gastos</a>
+
+<h2>Tabla de Bancos</h2>
+<table class="table" >
+    <thead><!--CABEZERAS-->
+    <tr><!--FILAS-->
+        
+        <th data-cls-column="bg-white fg-black text-left" >Entradas</th>
+       
+        <th data-cls-column="bg-white fg-black text-center">Monto</th>
+        <th data-cls-column="bg-white fg-black text-left" >Salidas</th>
+       
+        <th data-cls-column="bg-white fg-black text-center">Monto</th>
+        
+    </tr>
+    </thead>
+    <tbody><!--CUERPO DE LA TABLA-->
+     <? for(i=0; i <movimientosBancos.length;i++){
+        ?>
+         <tr><!--FILAS-->
+        <td><?= movimientosBancos[i][0] ?></td>
+        <td class="blue"><?= movimientosBancos[i][1] ?></td>
+         <td><?= movimientosBancos[i][2] ?></td>       
+        <td class="red"><?= movimientosBancos[i][3] ?></td>
+               
+        
+        </tr>
+        <?} ?>  
+   
+       
+   
+    
+    </tbody>
+</table>
+ <br>
+ 
+</div>  
+
+<button type="button" class="button alert"  id="boton" onclick="cerrar()">Cerrar</button>
+ <button type="button" class="button success" id="print" onclick="window.print()">Imprimir</button>
+
+ 
+
+   
+      <!-- Metro 4 -->
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  </body>
+
+
+  <script>
+    //CODIGO JAVASCRIPT
+
+
+  function cerrar(e){
+      google.script.host.close();
+  
+  };
+  
+  
+   var html_content =    
+    "<h3>Detalle de el flujo de caja</h3>" +
+    "<p>Cuenta con un buscador y paginacion ,una vez termine la consulta favor de cerrar la ventana</p>" +  "<h5> System by Roberto Ceratti </h5>" ;
+  Metro.infobox.create(html_content,"success");
+
+
+ 
+
+  function gastos(){
+
+    google.script.run.reporteGastos();
+  };
+
+
+  
+    document.getElementById("botonn").addEventListener("click",gastos );
+    
+ 
+   
+   
+  </script>
+ 
+  
+</html>
+

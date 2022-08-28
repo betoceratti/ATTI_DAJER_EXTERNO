@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+  </head>
+  <style>
+  
+  
+  .container{
+  display:flex;   
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  }
+  
+  
+  
+   
+  .table{
+   font-size:15px;
+  
+  }
+  
+ td{
+   font-size:12px;
+ }
+
+ .float{
+    position:fixed;
+  right:20px;
+  top:0;
+  background:transparent;
+ }
+
+ .box{
+   display:flex;
+   justify-content:space-around;
+
+ }
+ 
+ .button{
+   margin:20px;
+ }
+ 
+  
+  </style>
+
+  <body>
+  
+
+  <div class="container">
+  <!--MENU-->
+ 
+
+<!--FORMULARIO<div class="image-overlay op-green"></div>-->
+   <div class="img-container">
+    
+    <h1>Reporte de Gastos </h1>
+</div> 
+ <div data-role="imagemagnifier" data-magnifier-mode="glass">
+    <img src="https://cdn.pixabay.com/photo/2014/10/29/12/07/robot-507811__480.jpg">
+</div>
+
+<!--Comienza la tabla interactiva con buscador y paginacion-->
+<table class="table" data-role="table">
+    <thead><!--CABEZERAS-->
+    <tr><!--FILAS-->
+        <th >Fecha</th><!--COLUMNAS DE CABEZERAS-->
+        <th >Monto</th>
+        <th data-cls-column="bg-green fg-white text-left" >Categoria</th>
+        <th data-cls-column="bg-blue fg-white text-left" >Descripcion</th>
+        <th data-cls-column="bg-orange fg-white text-left">Nota</th>
+        
+    </tr>
+    </thead>
+    <tbody><!--CUERPO DE LA TABLA-->
+     <? for(i=0; i <rangoData.length;i++){
+        ?>
+         <tr><!--FILAS-->
+        <td><?= rangoData[i][8] ?></td>
+        <td>$<?= rangoData[i][1] ?></td>        
+        <td><?= rangoData[i][2] ?></td>
+        <td><?= rangoData[i][3] ?></td>        
+        <td><?= rangoData[i][4] ?></td>
+        
+        
+        </tr>
+        <?} ?>  
+   
+       
+   
+    
+    </tbody>
+</table>
+
+  <div class="box">
+   <button class="image-button yellow"onclick="window.print()">
+    <span class="mif-share icon"></span>
+    <span class="caption">PDF SHARE</span>
+</button>  
+  </div>
+ 
+ <button class="button alert" id="close" onclick="cerrar()">Cerrar</button>
+ 
+
+</div>  
+
+
+ 
+
+    <!-- Metro 4 -->
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  </body>
+
+  <script>
+  
+  function cerrar(e){
+  google.script.host.close();
+  
+  };
+  
+  
+    
+  var html_content =    
+    "<h3>$<?= tGastos ?></h3>" +
+    "Total Gasto 2021" +
+   "<h5> System by Roberto Ceratti </h5>" ;
+  Metro.infobox.create(html_content,"info");
+   
+   
+  </script>
+ 
+  
+</html>
+

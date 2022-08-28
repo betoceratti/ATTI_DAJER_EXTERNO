@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4cd99373c2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Goldman:wght@400;700&family=Inconsolata:wght@300&family=Montserrat:ital,wght@1,300&family=Orbitron:wght@500&family=Rubik:ital,wght@1,300&family=Space+Mono:ital@1&family=Teko:wght@500&family=Turret+Road:wght@500&display=swap" rel="stylesheet">
+
+  </head>
+  
+  <style>
+  
+  .nav-link{
+  cursor:pointer;
+  }
+  
+  .titulo{
+  font-size:15px;
+  font-family: 'Orbitron', sans-serif;
+  color:#808000;
+ }
+  
+  .table{
+   font-size:15px;
+  font-family: 'Comfortaa', sans-serif;
+  
+ }
+   
+  th{
+  color:blue;
+  
+  } 
+  
+  
+  
+  
+  tr:hover{
+  background:#D2CCCE;
+  color:white;
+  
+  }
+  
+  .designer{
+  font-size:15px;
+  font-family: 'Orbitron', sans-serif;
+  color:#808000;
+  }
+  
+  input{
+    color:blue;
+  }
+  
+
+  .green{
+    color: green;
+  }
+
+  .blue{
+    color: blue;
+  }
+
+  .red{
+  color: red;
+    
+  }
+
+
+  .small{
+    
+    font-size: 20px;
+    color:red;
+  }
+
+  .big{
+    font-size: 20px;
+    color: blue;
+   
+
+  }
+
+  .activo{
+    color: #1E0ECF;
+  font-weight: bold;
+  font-size:15px;
+  font-family: 'Orbitron', sans-serif;
+  }
+ 
+
+  </style>
+  
+  <body>
+  <!--MENU MAVEGACION-->
+  <div class="container">
+  <h2 class="titulo">BALANCE</h2>
+  
+  <ul class="nav nav-tabs">
+   <li class="nav-item">
+   <div class="nav-link active" aria-current="page" id ="menu">REPORTE CONTABLE </div>
+   </li>
+   <li class="nav-item">
+   <div class="nav-link" id="buscar" ></div>
+   </li>
+   <li class="nav-item">
+   <div class="nav-link" id="agregar"></div>
+   </li>
+  
+</ul>
+  
+ </div>
+ 
+  <!--CONTENEDOR DE LA INTERFACE DISPLAY -->
+  <div id="app">
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">AÑO</th>
+      <th scope="col">CAPITAL</th>
+      <th scope="col">INGRESOS</th>
+      <th scope="col">GASTOS</th>
+      <th scope="col">UTILIDAD</th>
+      
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i <datos.length;i++){
+        ?>
+        <tr>
+        <td data-valor="<?= datos[i][6] ?>" id="v"><?= datos[i][6] ?></td>
+        <td><?= datos[i][0] ?></td>
+        <td><?= datos[i][2] ?></td>
+        <td class="red"><?= datos[i][3] ?></td>       
+
+        <? if(datos[i][6] == 19 || datos[i][6] == 23 ){
+          ?>
+            <td  class="activo"><?= datos[i][4] ?></td>
+        <?} else{
+          ?>
+          <td  class="red"><?= datos[i][4] ?></td>
+       <? }?>
+
+
+
+        
+      
+        </tr>
+        <?} ?> 
+     
+   
+   <!--EN ESTE CASO ENE EL FOR LA I REPRESENTA LAS FILAS Y EL SEGUNDO INDEX LA COLUMNA-->
+    <!--LA DATA DE SHEETS LA RETORNA COMO UN ARREGLE DE ARRGLOS , CADA FILA ES UN ARREGLO  ->
+     <!--EJEMPLO VAR ARRAY = [['HOLA','PEPE','LORENA'],['PAPA','JOSE',34]]; -->
+  </tbody>
+  </table>
+  <h3>Reporte de recuperacion Mes actual</h3>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"> <?= mes ?></th>
+      <th scope="col">ESPERADO</th>
+      <th scope="col">REAL</th>
+      <th scope="col">PORCENTAJE</th>
+     
+      
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i <esperado.length;i++){
+        ?>
+        <tr>
+        <td><?= esperado[i][0] ?></td>
+        <td><?= esperado[i][1] ?></td>
+        <td><?= esperado[i][2] ?></td>
+        <td >%<?= esperado[i][3] ?></td>
+        
+        
+        </tr>
+        <?} ?> 
+     
+   
+   <!--EN ESTE CASO ENE EL FOR LA I REPRESENTA LAS FILAS Y EL SEGUNDO INDEX LA COLUMNA-->
+    <!--LA DATA DE SHEETS LA RETORNA COMO UN ARREGLE DE ARRGLOS , CADA FILA ES UN ARREGLO  ->
+     <!--EJEMPLO VAR ARRAY = [['HOLA','PEPE','LORENA'],['PAPA','JOSE',34]]; -->
+  </tbody>
+  </table>
+<div class="container overflow-hidden">
+  <div class="row gy-5">
+    <div class="col-6">
+      <div class="p-3 border bg-light blue"><?=  ingresos  ?></div>
+      <p>Ingresos</p>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light red"><?= gastos  ?></div>
+      <p>Gastos</p>
+    </div>
+    <div class="col-6 dato ">
+      <div id="resultado" class="p-3 border bg-light"><h4 >$<?= utilidad  ?></h4></div> 
+     
+      <p>Utilidad</p>
+    </div>
+
+    <div class="col-6">
+      <div class="p-3 border bg-light"><?= hoy  ?></div>
+      <p>Entrada efectivo Hoy</p>
+    </div>
+    </div>
+
+
+   </div>
+   <button type="button" class="btn btn-danger" id="btn">Cerrar</button>
+   <button type="button" class="btn btn-warning" id="print" onclick="window.print()">Imprimir</button>
+   <br>
+   	<br>
+    	<br>
+   <h5 class="designer">System by Roberto Ceratti</h5>
+
+ 
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    -->
+  </body>
+  
+  <script>
+   
+   let resultado = [<?= utilidad  ?>];
+   var valor = Math.round(Number(resultado[0])) ;  
+  let dato = document.querySelector("#resultado");
+  let data = document.querySelector('#v').dataset.valor;
+  
+  //alert(typeof(data));
+  
+ function color(){
+  
+        if (valor < 0) {
+         dato.classList.add('small');
+          dato.innerHTML = "$" +Math.round(valor);
+         
+        }else{
+          dato.classList.add('big');
+          dato.innerHTML = "$" +Math.round(valor);
+        }          
+
+
+ };
+ 
+ color();
+
+
+
+  function cerrar(e){
+  google.script.host.close();
+  
+  };
+  
+ document.getElementById("btn").addEventListener("click",cerrar );
+
+</script>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+
+  <style>
+
+    .show{
+      width: 150px;
+      height:150px;
+      boder: 1px solid gray;
+      box-shadow: 0,0,30px grey;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    img{
+      width:100%;
+      object-fit: cover;
+    }
+
+  </style>
+
+
+  
+  <body>
+    <h1>Hello, world!</h1>
+
+    <form id="formulario">
+ 
+       <div class="mb-3">
+    <label for="text" class="form-label designer">Texto</label>
+    <input type="text" class="form-control" name="text" id="text">
+  </div>
+
+  <div class="mb-3">
+    <label for="file" class="form-label designer">Selecciona archivo</label>
+    <input type="file" class="form-control" name="file" id="file" multiple>
+  </div>
+  
+   <div class="show" id="preview"></div>
+ 
+  <button  class="btn btn-primary" id="btn_submit" type="button" >Upload File</button>
+   <button  class="btn btn-danger" id="btn_close" onclick="cerrar()">Cancelar</button>
+</form>
+
+ 
+
+    <br>
+    <!--<h5 class="designer">Diseño de paginas by Roberto Ceratti</h5>-->
+    <h5 class="designer">System by Roberto Ceratti</h5>
+   
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+
+<script>
+
+document.getElementById('file').addEventListener("change", handleFiles, false);
+
+document.getElementById('btn_submit').addEventListener("click", uploadFile);
+
+function handleFiles(f) {
+
+  const files = document.getElementById('file').files;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+
+    if (!file.type.startsWith('image/')){ continue }
+
+    const img = document.createElement("img");
+    img.classList.add("obj");
+    img.file = file;
+    preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+
+    const reader = new FileReader();
+    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+    reader.readAsDataURL(file);
+  }
+};
+
+
+ function uploadFile(){
+   const selectedFile = document.getElementById('file').files[0];
+
+   const imgs = document.querySelectorAll(".obj");
+
+   for(i=0; i< imgs.length; i++){
+
+     new FileUpload(imgs[i], imgs[i].file);
+
+
+   }
+
+
+ };
+
+function FileUpload(img,file){
+
+   var reader = new FileReader();
+
+   reader.onload = function(event){
+     //console.log(event.target.result);
+
+     const obj = {
+       filename : file.name,
+       mimeType : file.type,
+       bytes: [...new Int8Array(event.target.result)]
+   };
+
+
+        google.script.run
+        .withSuccessHandler(link =>{
+          alert(`Archivos subidos con exito! su url es : ${link}`)
+          
+        })
+        .withFailureHandler(error => {
+          alert(`Ups! algo salio mal , vuelve a intentarlo.. ${error}`);
+          modal();
+        })
+        .upload(obj);
+   
+
+   };
+
+   reader.readAsArrayBuffer(file);
+ };
+ 
+function modal(){
+  google.script.run.upfileModal();
+};
+
+
+
+function cerrar(e){
+  google.script.host.close();
+};
+
+
+</script>
+
+</html>

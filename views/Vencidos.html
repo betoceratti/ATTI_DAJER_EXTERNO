@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+  </head>
+  <style>
+
+  .container{
+  display:flex;   
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+    
+  /*display: grid;
+   width: 90%;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);*/
+  }
+  
+  
+  
+  .t-menu {
+  background: blue;
+  color: white;
+  grid-column: 1 / 2;
+  grid-row: 3;
+   }
+  
+  .table{
+  grid-column:1/ 2;
+  grid-row: 2;
+  
+  }
+  td{
+   font-size:14px;
+ } 
+ 
+ .totales{
+   display: flex;
+   justify-content: center;
+   width: 100%;
+   heigth: 100px;
+   boder: 1px solid red;
+   background: black;
+ }
+
+ h4{
+   color: white;
+ }
+  
+
+  </style>
+  <body>
+
+  <div class="container">
+  <!--MENU-->
+ 
+
+<!--FORMULARIO<div class="image-overlay op-green"></div>-->
+  <div data-role="imagemagnifier" data-magnifier-mode="glass">   
+    
+    <img src="https://cdn.pixabay.com/photo/2020/05/15/16/51/fantasy-5174303__480.jpg">
+    
+</div>
+    
+<!--Comienza la tabla interactiva con buscador y paginacion-->
+<table class="table" data-role="table">
+    <thead><!--CABEZERAS-->
+    <tr><!--FILAS-->
+        <th >Nombre</th><!--COLUMNAS DE CABEZERAS-->
+        <th >Monto Inicial</th>
+        <th data-cls-column="bg-green fg-white text-center">Vigente</th>
+        <!--<th data-cls-column="bg-green fg-white text-center" >Vigente</th>-->
+        <th data-cls-column="bg-red fg-white text-right" >Vencido(sin moratorios)</th>
+        <th data-cls-column="bg-red fg-white text-right" >P-Vencidos</th>
+        <th data-cls-column="bg-red fg-white text-right" >Vence el:</th>
+    </tr>
+    </thead>
+    <tbody><!--CUERPO DE LA TABLA-->
+     <? for(i=0; i <rangoData.length;i++){
+        ?>
+         <tr><!--FILAS-->
+        <td><?= rangoData[i][0] ?></td>
+        <td>$<?= rangoData[i][1] ?></td>
+        
+        
+        
+        
+        <td>$<?= rangoData[i][9] ?></td>
+        
+        <td>$<?= Math.trunc(rangoData[i][10])?></td>
+        <td><?= rangoData[i][8] ?></td>
+        <td><?= rangoData[i][28] ?></td>
+        
+        </tr>
+        <?} ?>    
+   
+       
+   
+    
+    </tbody>
+</table>
+
+ <button class="button alert"  id="boton">Cerrar</button>
+
+ 
+ 
+</div>  
+
+
+ 
+
+    <!-- Metro 4 -->
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  </body>
+  <script>
+  
+  function cerrar(e){
+  google.script.host.close();
+  
+  };
+  
+   document.getElementById("boton").addEventListener("click",cerrar );
+    
+  var html_content =
+    "<h3>Lista de casos vencidos</h3>" +
+    " <h4>Monto vencido Total $ <?= Math.trunc(resultado) ?></h4>"+
+    "<h4>Monto vencido 2021 $ <?= Math.trunc(total21) ?></h4>"+
+     "<h4>Monto vencido 2022 $ <?= Math.trunc(total22) ?></h4>"+    
+   "<h5> System by Roberto Ceratti </h5>" ;
+  Metro.infobox.create(html_content,"alert");
+   
+   
+  </script>
+ 
+  
+</html>

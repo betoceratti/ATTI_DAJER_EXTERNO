@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>APP DAJER</title>
+    <?!= include("Css");?>
+  </head>
+  <body>
+
+<div class="container-lg">
+   <div class="row text-center">
+     <h1>Nuestro Equipo</h1>
+     </div>
+
+ <div class="row md-center">
+  
+    <?=  getDatos.forEach((row)=>{?>
+     
+    <div class="card m-3" style="width: 16rem;">
+      <img src="https://drive.google.com/uc?export=dowmload&id=<?= row[5]?>" class="card-img-top" alt="...">
+      <div class="card-body text-left">
+        <h5 class="card-title"><?= row[0] ?></h5>
+        <h6 class="card-subtitle">
+          <?= row[6]?>
+        </h6>
+        <p class="card-text">Position /<?= row[3]?></p>
+
+        <!--<a href="#" class="btn btn-primary">Read more</a>-->
+      </div>
+</div>
+<?}); ?>
+
+
+
+ </div>
+   
+
+  </div>
+
+
+   
+   <?!= include("Js");?>
+  </body>
+
+
+
+
+  
+
+
+</html>
+
+
+

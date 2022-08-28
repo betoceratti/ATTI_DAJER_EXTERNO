@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+      <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    <script src="https://kit.fontawesome.com/4cd99373c2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Goldman:wght@400;700&family=Inconsolata:wght@300&family=Montserrat:ital,wght@1,300&family=Orbitron:wght@500&family=Rubik:ital,wght@1,300&family=Space+Mono:ital@1&family=Teko:wght@500&family=Turret+Road:wght@500&display=swap" rel="stylesheet">
+
+  </head>
+  
+  <style>
+
+   .nav-link{
+  cursor:pointer;
+  
+  }
+  
+  .titulo{
+  font-size:15px;
+  font-family: 'Orbitron', sans-serif;
+  color:#808000;
+ }
+  
+  .table{
+   font-size:13px;
+  font-family: 'Comfortaa', sans-serif;
+  
+ }
+   
+  h6{ 
+  
+  font-size: 13px;
+  padding-left:10px;
+  font-family: 'Comfortaa', sans-serif;
+  
+  }
+
+  .red{
+  color:red;
+
+  }
+  
+  .designer{
+  font-size:15px;
+  font-family: 'Comfortaa', sans-serif;
+  color:#808000;
+  } 
+
+  
+  #buscar,#agregar{
+    color:white;
+    background:blue;
+  }
+  
+    /*
+LOADER CSS
+
+
+*/
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;    
+   
+  }
+
+  .lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+  
+  .loader{
+    background: linear-gradient(25deg,rgb(26, 19, 19), rgb(185, 13, 134));
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(37,51,54,1) 100%);  
+    background-image: url('https://cdn.pixabay.com/photo/2019/12/18/05/19/hacker-4703109_1280.jpg'); 
+    background-position: center;
+    background-size:cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    flex-direction: column; 
+    z-index: 800;    
+    transition: .9s clip-path ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;   
+    clip-path: circle(80% at 50% 0);
+    clip-path: circle(50% at 48% 51%);
+    /* clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);*/
+}
+
+
+
+
+.out{
+    
+    clip-path: circle(0% at 50% 0%);
+    /*clip-path: polygon(51% 1%, 54% 5%, 51% 5%, 48% 5%);*/
+}
+
+.atti{
+   color: #13cdda;
+   color:white;
+   font-size:20px;
+   font-family: 'Orbitron', sans-serif;
+}
+
+.float{
+position:fixed;
+right:10px;
+top:0;
+
+}
+
+  </style>
+  
+  <body>
+  <!--MENU MAVEGACION-->
+  <div class="loader" id="loader">
+     <h1 class="atti" >A T T I  SYSTEM</h1>
+    <div class="lds-ellipsis big" ><div></div><div></div><div></div><div></div></div>
+       </div>
+       <!--LOADER -->
+
+  <div class="container">
+  <h2 class="titulo">Listado Exigibles de Hoy</h2>
+  
+  <ul class="nav nav-tabs">
+   <li class="nav-item">
+   <div class="nav-link active" aria-current="page" id ="menu"><a href="#" id="pdf"> PDF 💻</a></div>
+   </li> 
+   <li class="nav-item">
+   <div class="nav-link" id="buscar" >Total de Hoy : <?= totalExigibles  ?></div>
+   </li>
+   <li class="nav-item">
+   <div class="nav-link" id="agregar"><?= numero  ?>/-Casos</div>
+   </li>
+   <li class="nav-item">
+   <div class="nav-link" id="agregar"> Dif =<?= diferencia  ?></div>
+   </li>
+  
+  
+</ul>
+  
+ </div>
+ 
+ 
+  <!--CONTENEDOR DE LA INTERFACE DISPLAY -->
+  <div id="app">
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Pago</th>
+      <th scope="col">Saldo Vigente</th>
+      <th scope="col">Saldo Vencido</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i <rangoData.length;i++){
+        ?>
+        <tr>
+        <td><?= rangoData[i][0] ?></td>
+        <td>$<?= Math.round(rangoData[i][1]) ?></td>
+        <td ><h6>$<?= rangoData[i][2] ?></h6></td>
+        <td class="red"><h6>$<?= rangoData[i][3] ?></h6></td>
+        </tr>
+        <?} ?> 
+     
+  
+  
+  </tbody>
+  </table>
+  <br>
+
+   <h2 class="titulo">Pagos de hoy Control de pagos</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Pago</th>
+     
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i <pagosHoy.length;i++){
+        ?>
+        <tr>
+        <td><?= pagosHoy[i][0] ?></td>
+        <td>$<?= Math.round(pagosHoy[i][1]) ?></td>
+        
+        </tr>
+        <?} ?> 
+     
+  
+  
+  </tbody>
+  </table>
+  <br>
+ 
+   <h2 class="titulo">Pagos de hoy en Cedulas</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      
+     
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i < clickeos.length;i++){
+        ?>
+        <tr>
+        <td><?= clickeos[i][0] ?></td>
+       
+        
+        </tr>
+        <?} ?> 
+     
+  
+  
+  </tbody>
+  </table>
+  <br>
+  
+   <h2 class="titulo">Gastos de hoy</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Monto</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Concepto</th>
+      
+     
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i < gastosHoy.length;i++){
+        ?>
+        <tr>
+        <td><?= gastosHoy[i][0] ?></td>
+         <td><?= gastosHoy[i][1] ?></td>
+          <td><?= gastosHoy[i][2] ?></td>
+           <td><?= gastosHoy[i][3] ?></td>
+       
+        
+        </tr>
+        <?} ?> 
+     
+  
+  
+  </tbody>
+  </table>
+
+  <br>
+   <h2 class="titulo">Movimientos de Prestamos a Colaboradores</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Colaborador</th>
+      <th scope="col">Monto</th>
+      <th scope="col">Concepto</th>
+      
+     
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i < colabHoy.length;i++){
+        ?>
+        <tr>
+        <td><?= colabHoy[i][0] ?></td>
+         <td><?= colabHoy[i][1] ?></td>
+          <td><?= colabHoy[i][2] ?></td>
+           <td><?= colabHoy[i][3] ?></td>
+       
+        
+        </tr>
+        <?} ?> 
+     
+  
+  
+  </tbody>
+  </table>
+  
+   <br>
+   <h2 class="titulo">Altas de creditos del dia!</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Monto</th>
+      <th scope="col">Inicio</th>
+      <th scope="col">Plazo</th>
+      
+     
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i < rangoAltas.length;i++){
+        ?>
+        <tr>
+        <td><?= rangoAltas[i][0] ?></td>
+         <td><?= rangoAltas[i][1] ?></td>
+          <td><?= rangoAltas[i][2] ?></td>
+           <td><?= rangoAltas[i][3] ?></td>
+       
+        
+        </tr>
+        <?} ?> 
+     
+  
+  
+  </tbody>
+  </table>
+  
+  
+   </div>
+    <div class="float">
+       <button type="button" class="btn btn-ligth" id="close"><h2>❌</h2></button>
+    </div>
+   
+    <button type="button" class="btn btn-success" id="pago">Aplicar pago en Cedula</button>
+    <button type="button" class="btn btn-success" id="pagoControl">Aplicar pago en Control de pagos</button>
+    <button type="button" class="btn btn-warning" id="print" onclick="window.print()">Pdf--<i class="fas fa-file-pdf"></i></button>
+   <br>
+     <br>    
+   
+    <h5 class="designer">System by  Roberto Ceratti </h5>
+    
+   <!--<i class="fas fa-print"></i> <i class="fas fa-file-pdf"></i>-->
+  
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+   
+  </body>
+  
+  <script>
+  
+  window.addEventListener('load',()=>{
+
+    retardo();
+
+
+  });
+
+  function retardo(){
+      setTimeout(() => {
+        document.getElementById("loader").classList.toggle("out");
+        },4000);
+
+};
+
+
+  function pagar(){
+    google.script.run.withSuccessHandler(cerrar).buscarCliente();
+    alertify.success('En proceso , espera porfavor!');
+  };
+  
+   function pagarControl(){
+    google.script.run.withSuccessHandler(cerrar).pagosModal();
+     alertify.success('En proceso , espera porfavor!');
+  }; 
+
+  function downloadPdf(){
+    google.script.run.withSuccessHandler(cerrar).descargarPdf();
+     alertify.success('En proceso , espera porfavor!');
+  };
+
+  function cerrar(e){
+  google.script.host.close();
+  
+  };
+  
+  
+  
+   document.getElementById("pago").addEventListener("click",pagar );  
+   document.getElementById("close").addEventListener("click",cerrar );
+   document.getElementById("pagoControl").addEventListener("click",pagarControl );
+    document.getElementById("pdf").addEventListener("click",downloadPdf );
+  
+  
+  
+  
+  
+  </script>
+</html>
+
+
+

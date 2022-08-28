@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4cd99373c2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Goldman:wght@400;700&family=Inconsolata:wght@300&family=Montserrat:ital,wght@1,300&family=Orbitron:wght@500&family=Rubik:ital,wght@1,300&family=Space+Mono:ital@1&family=Teko:wght@500&family=Turret+Road:wght@500&display=swap" rel="stylesheet">
+
+  </head>
+  
+  <style>
+
+  .float{
+  position:fixed;
+  right:10px;
+  top:0;
+
+}  
+
+ 
+  
+ 
+
+  .nav-link{
+  cursor:pointer;
+  
+  }
+
+  
+  
+  .titulo{
+  font-size:15px;
+  font-family: 'Orbitron', sans-serif;
+  color:#808000;
+ 
+ }
+  
+  .table{
+   font-size:13px;
+  font-family: 'Comfortaa', sans-serif;
+  
+ }
+   
+  h6{ 
+  
+  font-size: 13px;
+  padding-left:10px;
+  font-family: 'Comfortaa', sans-serif;
+  
+  }
+
+  .red{
+  color:red;
+
+  }
+  
+  .designer{
+  font-size:15px;
+  font-family: 'Comfortaa', sans-serif;
+  color:#808000;
+  } 
+  #buscar,#agregar{
+    color:white;
+    background:blue;
+  }
+
+  .blue{
+    color: #0F14D6;
+    font-size:18px;
+    border: 1px solid #0F14D6;
+    font-size:18px;
+  }
+  
+  .name{
+    color: #581845;
+  }
+  
+  </style>
+  
+  <body>
+  <!--MENU MAVEGACION-->
+  <div class="container fijo">
+  <h2 class="titulo">Listado Ultimos 10 Casos Otorgados</h2>
+  
+  <ul class="nav nav-tabs">
+   <li class="nav-item">
+   <div class="nav-link active" aria-current="page" id ="menu">Recientes</div>
+   </li>
+    <li class="nav-item">
+   <div class="nav-link active" aria-current="page" id ="menu">Ultima Fila <?= ultimaFila ?> </div>
+   </li>
+   
+  
+</ul>
+  
+ </div>
+ 
+  <!--CONTENEDOR DE LA INTERFACE DISPLAY -->
+  <div id="app">
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Monto</th>
+       <th scope="col">Inicio</th>
+      <th scope="col">Plazo</th>
+      <th scope="col">Frecuencia</th>
+      <th scope="col">Ahorro</th>
+       <th scope="col">Nota</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+        <? for(i=0; i <rangoData.length;i++){
+        ?>
+        <tr>
+        <td class="name"><?= rangoData[i][0] ?></td>
+        <td><?= rangoData[i][15] ?></td>
+
+        <?if(rangoData[i][25] == "6"){
+           ?>
+            <td class="blue"><h6><?= rangoData[i][16] ?></h6></td>
+       <? }else{
+           ?>
+              <td><h6><?= rangoData[i][16] ?></h6></td>
+       <?}?>
+
+       
+        <td ><h6><?= rangoData[i][17] ?></h6></td>
+         <td ><h6><?= rangoData[i][21] ?></h6></td>
+          <td ><h6><?= rangoData[i][23] ?></h6></td>
+        <td class="red"><h6><?= rangoData[i][14] ?></h6></td>
+        </tr>
+        <?} ?> 
+     
+  
+   <!--EN ESTE CASO ENE EL FOR LA I REPRESENTA LAS FILAS Y EL SEGUNDO INDEX LA COLUMNA-->
+    <!--LA DATA DE SHEETS LA RETORNA COMO UN ARREGLE DE ARRGLOS , CADA FILA ES UN ARREGLO  ->
+     <!--EJEMPLO VAR ARRAY = [['HOLA','PEPE','LORENA'],['PAPA','JOSE',34]]; -->
+  </tbody>
+  </table>
+  <br>
+<hr>
+  
+
+  
+   </div>
+    <div class="float">
+       <button type="button" class="btn btn-ligth" id="close"><h2>❌</h2></button>
+    </div>
+   
+  
+    <button type="button" class="btn-warning" id="print" onclick="window.print()">Imprimir</button>
+   <br>
+     <br>    
+   
+    <h5 class="designer">System by  Roberto Ceratti </h5>
+    
+   
+  
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    -->
+  </body>
+  
+  <script>
+  
+  
+  
+  function cerrar(e){
+  google.script.host.close();
+  
+  };  
+  
+ 
+  document.getElementById("close").addEventListener("click",cerrar );
+  
+  
+  
+  </script>
+</html>
+
+
+

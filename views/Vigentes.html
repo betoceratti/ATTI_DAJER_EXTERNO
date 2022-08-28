@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+     <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+   
+  </head>
+  <style>
+  
+   .container{
+  display:flex;   
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  
+  }
+  
+ .saldo{
+   background: linear-gradient(60deg, rgb(155, 82, 118) 41%, rgb(58, 14, 190) 100%);
+   width:50%;
+   text-align:center;
+   padding:5px;
+   border-radius:20px;
+ }
+
+ .saldo p{
+   font-size:20px;
+   color:white;
+ }   
+ 
+  
+ td{
+   font-size:15px;
+ }
+  
+  </style>
+  <body>
+
+
+  <div class="container">
+  <!--MENU-->
+ 
+
+<!--FORMULARIO<div class="image-overlay op-green"></div>-->
+   <div data-role="imagemagnifier" data-magnifier-mode="glass">
+    <img src="https://cdn.pixabay.com/photo/2014/06/24/23/16/robot-376758__480.jpg">
+    
+</div>
+ 
+ 
+
+<!--Comienza la tabla interactiva con buscador y paginacion-->
+<table class="table" data-role="table">
+    <thead><!--CABEZERAS-->
+    <tr><!--FILAS-->
+        <th >Nombre</th><!--COLUMNAS DE CABEZERAS-->
+        <th >Monto Inicial</th>
+         <th >Otorgado en Mes</th>
+        <th >Vence en Mes</th>
+        <th data-cls-column="bg-green fg-white text-center" >Saldo_Vigente</th>
+        <th data-cls-column="bg-red fg-white text-center" >Saldo_Vencido</th>
+        <th data-cls-column="bg-orange fg-white text-left">Pagos_V</th>
+        
+    </tr>
+    </thead>
+    <tbody><!--CUERPO DE LA TABLA-->
+     <? for(i=0; i <rangoData.length;i++){
+        ?>
+         <tr><!--FILAS-->
+        <td><?= rangoData[i][0] ?></td>
+        <td><?= rangoData[i][1] ?></td>
+        <td><?= rangoData[i][11] ?></td>
+        <td><?= rangoData[i][12] ?></td>
+        
+        <td><?= rangoData[i][9] ?></td>
+         <td><?= rangoData[i][10] ?></td>
+        
+        
+        
+        <td><?= rangoData[i][8] ?></td>
+        
+        
+        </tr>
+        <?} ?>  
+   
+       
+  
+    
+    </tbody>
+</table>
+
+  
+ <button class="button alert"  id="boton" onclick="cerrar()">Cerrar</button>
+
+ 
+</div>  
+
+
+ 
+
+    <!-- Metro 4 -->
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  </body>
+  <script>
+  
+
+   var html_content =    
+    "<h3>Lista de casos vigentes</h3>" +
+    "Saldo"+
+    "<h2><?= saldo ?></h2>" +
+    "<h4> Casos <?= nCasos ?></h4>" +
+   "<h5> System by Roberto Ceratti </h5>" ;
+  Metro.infobox.create(html_content,"success");
+
+
+
+  function cerrar(e){
+  google.script.host.close();
+  
+  };
+
+  function alerta(e){
+     let columna = document.getElementById("col").value; 
+    alert(columna);
+  };
+
+  function getData(e){
+    google.script.run.vigentes();
+
+  };
+
+  /*function update(){
+
+  let columna = document.getElementById("col").value;  
+  google.script.run.withSuccessHandler(getData).actualizar(columna);
+  alertify.success('Se actualizo la columna : ' + columna );
+ 
+
+  };*/
+  
+     
+ 
+   
+   
+  </script>
+ 
+  
+</html>
+
